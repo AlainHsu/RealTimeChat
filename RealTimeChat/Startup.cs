@@ -44,7 +44,6 @@ namespace RealTimeChat
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseSignalR(enpoint => enpoint.MapHub<ChatHub>("/chatHub"));
             app.UseCors(builder => builder
                 .AllowAnyHeader()
                 .AllowAnyMethod()
@@ -63,7 +62,7 @@ namespace RealTimeChat
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }

@@ -21,9 +21,9 @@ namespace RealTimeChat.Hubs
         public async Task receiveMsg(String msg)
         {
             MessageTemplate temp = JsonConvert.DeserializeObject<MessageTemplate>(msg);
-            string toWhom = temp.toWhom; /// userId --> connId (from DB)
+            string fromWhom = temp.fromWhom; /// userId --> connId (from DB)
 
-            await Clients.Client(toWhom).SendAsync("receiveMsg",temp.message);
+            await Clients.Client(fromWhom).SendAsync("receiveMsg",temp.message);
 
             //var client = Clients.AllExcept(temp.FromWhom);
             //await client.SendAsync("receiveMsg", temp.Message);
