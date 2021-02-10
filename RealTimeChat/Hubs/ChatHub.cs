@@ -23,10 +23,10 @@ namespace RealTimeChat.Hubs
             MessageTemplate temp = JsonConvert.DeserializeObject<MessageTemplate>(msg);
             string fromWhom = temp.fromWhom; /// userId --> connId (from DB)
 
-            await Clients.Client(fromWhom).SendAsync("receiveMsg",temp.message);
+            //await Clients.Client(fromWhom).SendAsync("receiveMsg",temp.message);
 
-            //var client = Clients.AllExcept(temp.FromWhom);
-            //await client.SendAsync("receiveMsg", temp.Message);
+            var client = Clients.AllExcept(temp.fromWhom);
+            await client.SendAsync("receiveMsg", temp.message);
         }
     }
 }
